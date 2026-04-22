@@ -13,13 +13,16 @@ public class RayGun : MonoBehaviour
     public float maxLineDistance = 5;
     public float lineShowTimer = 0.3f;
 
+    List<float> rayAngles = new List<float>();
+    private float currentSpreadOffset = 0.2f;
+
     public AudioSource audioSource;
     public AudioClip laserSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        rayAngles.Add(0f);
     }
 
     // Update is called once per frame
@@ -27,15 +30,25 @@ public class RayGun : MonoBehaviour
     {
         if (OVRInput.GetDown(shootingButton))
         {
-            Shoot();
+            ShootSpread();
         }
     }
 
-    public void Shoot()
+    public void ShootSpread()
+    {
+        foreach (float offset in rayAngles)
+        {
+            Vector3 angle = new Vector3(offset + shootingPoint.forward.x, shootingPoint.forward.y, shootingPoint.forward.z);
+            Shoot(angle);
+        }
+    }
+
+
+    public void Shoot(Vector3 angle)
     {
         audioSource.PlayOneShot(laserSound);
 
-        Ray ray = new Ray(shootingPoint.position, shootingPoint.forward);
+        Ray ray = new Ray(shootingPoint.position, angle);
         bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxLineDistance, layerMask);
 
         Vector3 endPoint = Vector3.zero;
@@ -49,6 +62,13 @@ public class RayGun : MonoBehaviour
             {
                 hit.collider.enabled = false;
                 ghost.Kill();
+
+                if (ghost.name.Contains("Upgrade"))
+                {
+                    rayAngles.Add(currentSpreadOffset);
+                    rayAngles.Add(-currentSpreadOffset);
+                    currentSpreadOffset += 0.2f;
+                }
             }
             else
             {
@@ -59,7 +79,7 @@ public class RayGun : MonoBehaviour
 
         } else
             // Else, stops at maxDistance
-            endPoint = shootingPoint.position + shootingPoint.forward * maxLineDistance;
+            endPoint = shootingPoint.position + angle * maxLineDistance;
 
         LineRenderer line = Instantiate(linePrefab);
         line.positionCount = 2;
