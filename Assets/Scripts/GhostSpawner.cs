@@ -1,7 +1,8 @@
+using Meta.XR.MRUtilityKit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Meta.XR.MRUtilityKit;
+using UnityEngine.SceneManagement;
 
 public class GhostSpawner : MonoBehaviour
 {
@@ -45,7 +46,9 @@ public class GhostSpawner : MonoBehaviour
                 Vector3 randomPostionNormalOffset = pos + norm * normalOffset;
                 randomPostionNormalOffset.y = 0;
 
-                Instantiate(ghostPrefab, randomPostionNormalOffset, Quaternion.identity);
+                GameObject ghost = Instantiate(ghostPrefab, randomPostionNormalOffset, Quaternion.identity);
+                SceneManager.MoveGameObjectToScene(ghost, SceneManager.GetSceneByBuildIndex(1));
+
                 return;
             } else
             {

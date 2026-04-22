@@ -1602,27 +1602,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985354292}
-  - component: {fileID: 985354291}
+  - component: {fileID: 985354293}
   m_Layer: 0
   m_Name: TimeManager
-  m_TagString: Untagged
+  m_TagString: TimeManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &985354291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985354290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fec4046eb65e8943b2b4999fc49da93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LeaderboardManager
-  text: {fileID: 647073722}
 --- !u!4 &985354292
 Transform:
   m_ObjectHideFlags: 0
@@ -1638,6 +1625,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985354293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985354290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ca83c021635ff45905166ff6a27992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeManager
+  text: {fileID: 647073722}
+  time: 0
 --- !u!1 &1065974325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2780,8 @@ MonoBehaviour:
   height: 1
   spawnedOrbs: []
   maxNumberOfTry: 100
+  leaderboardManager: {fileID: 0}
+  timeManager: {fileID: 0}
 --- !u!4 &1916933930
 Transform:
   m_ObjectHideFlags: 0
@@ -2871,6 +2874,6 @@ SceneRoots:
   - {fileID: 649994133}
   - {fileID: 1710644351}
   - {fileID: 490698242}
-  - {fileID: 1739119605}
   - {fileID: 465072768}
   - {fileID: 985354292}
+  - {fileID: 1739119605}

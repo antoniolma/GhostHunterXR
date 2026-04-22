@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Meta.XR.MRUtilityKit;
+using UnityEngine.SceneManagement;
 
 public class OrbsSpawner : MonoBehaviour
 {   
@@ -27,14 +28,20 @@ public class OrbsSpawner : MonoBehaviour
         MRUK.Instance.RegisterSceneLoadedCallback(SpawnOrbs);
     }
 
-    public void DestroyOrb(GameObject orb)
+    async public void DestroyOrb(GameObject orb)
     {
         spawnedOrbs.Remove(orb);
         Destroy(orb);
 
         if (spawnedOrbs.Count == 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            LeaderboardManager leaderboardManager = GameObject.FindGameObjectWithTag("LeaderboardManager").GetComponent<LeaderboardManager>();
+            TimeManager timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+            
+            leaderboardManager.UpdateLeaderboard(timeManager.time);
+            leaderboardManager.lastDeath = timeManager.totalTime;
+            await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
     }
 
@@ -61,6 +68,8 @@ public class OrbsSpawner : MonoBehaviour
 
             GameObject spawned = Instantiate(orbPrefab, randomPosition, Quaternion.identity);
             spawnedOrbs.Add(spawned);
+
+            SceneManager.MoveGameObjectToScene(spawned, SceneManager.GetSceneByBuildIndex(1));
 
         }  
     }
