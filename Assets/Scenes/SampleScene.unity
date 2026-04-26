@@ -475,75 +475,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &490698242
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 127
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 127
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 127
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.006360489
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.000000038554504
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.35327676
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.00000003774895
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
-      propertyPath: m_Name
-      value: CoffeeCup
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 051cad5e5d570d748b40e477797a8d23, type: 3}
 --- !u!33 &513384490 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 3300000, guid: c28fa8d61f81fb742b1180a6d4516625, type: 3}
@@ -1637,8 +1568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ca83c021635ff45905166ff6a27992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
-  text: {fileID: 647073722}
+  text: {fileID: 0}
   time: 0
+  lastTime: 0
+  totalTime: 0
 --- !u!1 &1065974325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1602,59 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1346441064}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1075356786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075356788}
+  - component: {fileID: 1075356787}
+  m_Layer: 0
+  m_Name: CoffeeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1075356787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075356786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e898a70108d3c644e93a65800e08188e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoffeeSpawner
+  numberOfCoffeeToSpawn: 5
+  coffeePrefab: {fileID: 6693892637596649022, guid: a839efadc4ffe514a80010b1a77cd35c, type: 3}
+  minHeight: 0.5
+  maxHeight: 2
+  spawnedCoffee: []
+  spawnedGhosts: []
+  ghostSpawner: {fileID: 1576836121}
+  timeStarted: 0
+  maxNumberOfTry: 100
+--- !u!4 &1075356788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075356786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06829, y: -0, z: -0.89342}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139100296
 GameObject:
@@ -2070,10 +2056,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ghostPrefab: {fileID: 8154239690180877565, guid: 7aab272bccfac464291b8d12cdf26361, type: 3}
+  ghostUpgradePrefab: {fileID: 8154239690180877565, guid: 113ae1b17a9a18042a347b27bc71196d, type: 3}
   spawnTime: 1
   minEdgeDistance: 0.3
   spawnLabel: 4
   normalOffset: -2
+  spawnedGhosts: []
+  maxGhostNumber: 10
 --- !u!4 &1576836122
 Transform:
   m_ObjectHideFlags: 0
@@ -2780,8 +2769,6 @@ MonoBehaviour:
   height: 1
   spawnedOrbs: []
   maxNumberOfTry: 100
-  leaderboardManager: {fileID: 0}
-  timeManager: {fileID: 0}
 --- !u!4 &1916933930
 Transform:
   m_ObjectHideFlags: 0
@@ -2871,9 +2858,9 @@ SceneRoots:
   - {fileID: 1843229863}
   - {fileID: 1576836122}
   - {fileID: 1916933930}
+  - {fileID: 1075356788}
   - {fileID: 649994133}
   - {fileID: 1710644351}
-  - {fileID: 490698242}
   - {fileID: 465072768}
   - {fileID: 985354292}
   - {fileID: 1739119605}

@@ -43,7 +43,6 @@ public class RayGun : MonoBehaviour
         }
     }
 
-
     public void Shoot(Vector3 angle)
     {
         audioSource.PlayOneShot(laserSound);
@@ -58,6 +57,7 @@ public class RayGun : MonoBehaviour
             endPoint = hit.point;
     
             Ghost ghost = hit.transform.GetComponent<Ghost>();
+            Coffee coffee = hit.transform.GetComponent<Coffee>();
             if (ghost)
             {
                 hit.collider.enabled = false;
@@ -69,6 +69,11 @@ public class RayGun : MonoBehaviour
                     rayAngles.Add(-currentSpreadOffset);
                     currentSpreadOffset += 0.2f;
                 }
+            }
+            else if (coffee)
+            {
+                hit.collider.enabled = false;
+                coffee.Kill();
             }
             else
             {

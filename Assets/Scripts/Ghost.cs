@@ -67,6 +67,14 @@ public class Ghost : MonoBehaviour
         return closest;
     }
 
+    public void ApplySlow(int type)
+    {
+        if (type == 1)
+            speed /= 3;
+        else
+            speed *=3;
+    }
+
     public void Kill()
     {
         agent.enabled = false;

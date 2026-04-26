@@ -1,12 +1,14 @@
-using Meta.XR.MRUtilityKit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Meta.XR.MRUtilityKit;
 using UnityEngine.SceneManagement;
+using Unity.Collections;
 
 public class GhostSpawner : MonoBehaviour
 {
     public GameObject ghostPrefab;
+    public GameObject ghostUpgradePrefab;
     public float spawnTime = 1;
 
     public float minEdgeDistance = 0.3f;
@@ -14,16 +16,21 @@ public class GhostSpawner : MonoBehaviour
     public float normalOffset;
     private int spawnTry = 1000;
 
+    public List<GameObject> spawnedGhosts;
+    public int maxGhostNumber;
+
     private float timer;
 
     // Update is called once per frame
     void Update()
     {
+        print(spawnedGhosts.Count);
+
         if (!MRUK.Instance && !MRUK.Instance.IsInitialized)
             return;
 
         timer += Time.deltaTime;
-        if (timer > spawnTime)
+        if (timer > spawnTime && spawnedGhosts.Count < maxGhostNumber)
         {
             SpawnGhost();
             timer -= spawnTime;
@@ -36,6 +43,7 @@ public class GhostSpawner : MonoBehaviour
 
         int currentTry = 0;
         bool hasFoundPosition = false;
+        float ghostRandomizer = Random.Range(0.0f, 1.0f);
 
         while (currentTry < spawnTry)
         {
@@ -45,18 +53,24 @@ public class GhostSpawner : MonoBehaviour
             {
                 Vector3 randomPostionNormalOffset = pos + norm * normalOffset;
                 randomPostionNormalOffset.y = 0;
+                
+                GameObject ghost;
+                if (ghostRandomizer < 0.8)
+                {
+                    ghost = Instantiate(ghostPrefab, randomPostionNormalOffset, Quaternion.identity);
+                } else
+                {
+                    ghost = Instantiate(ghostUpgradePrefab, randomPostionNormalOffset, Quaternion.identity);
+                    ghost.GetComponent<Ghost>().speed = 0.5f;
+                }
 
-                GameObject ghost = Instantiate(ghostPrefab, randomPostionNormalOffset, Quaternion.identity);
                 SceneManager.MoveGameObjectToScene(ghost, SceneManager.GetSceneByBuildIndex(1));
-
+                spawnedGhosts.Add(ghost);
                 return;
             } else
             {
                 currentTry++;
             }
         }
-
-
-        
     }
 }
