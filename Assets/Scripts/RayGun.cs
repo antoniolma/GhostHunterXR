@@ -41,12 +41,11 @@ public class RayGun : MonoBehaviour
             Vector3 angle = new Vector3(offset + shootingPoint.forward.x, shootingPoint.forward.y, shootingPoint.forward.z);
             Shoot(angle);
         }
+        audioSource.PlayOneShot(laserSound);
     }
 
     public void Shoot(Vector3 angle)
     {
-        audioSource.PlayOneShot(laserSound);
-
         Ray ray = new Ray(shootingPoint.position, angle);
         bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxLineDistance, layerMask);
 
