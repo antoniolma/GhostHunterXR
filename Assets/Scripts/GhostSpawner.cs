@@ -21,11 +21,16 @@ public class GhostSpawner : MonoBehaviour
 
     private float timer;
 
+    public static GhostSpawner Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        print(spawnedGhosts.Count);
-
         if (!MRUK.Instance && !MRUK.Instance.IsInitialized)
             return;
 

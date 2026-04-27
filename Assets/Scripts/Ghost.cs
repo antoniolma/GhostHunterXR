@@ -83,6 +83,7 @@ public class Ghost : MonoBehaviour
 
     public void Destroy()
     {
+        GhostSpawner.Instance.spawnedGhosts.Remove(gameObject);
         Destroy(gameObject);
     }
 }

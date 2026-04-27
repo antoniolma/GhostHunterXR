@@ -1565,10 +1565,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 985354290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ca83c021635ff45905166ff6a27992, type: 3}
+  m_Script: {fileID: 11500000, guid: 214d4ee017903c142860ce8fd8d32be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
-  text: {fileID: 0}
+  text: {fileID: 647073722}
   time: 0
   lastTime: 0
   totalTime: 0

@@ -28,7 +28,7 @@ public class OrbsSpawner : MonoBehaviour
         MRUK.Instance.RegisterSceneLoadedCallback(SpawnOrbs);
     }
 
-    async public void DestroyOrb(GameObject orb)
+    public void DestroyOrb(GameObject orb)
     {
         spawnedOrbs.Remove(orb);
         Destroy(orb);
@@ -40,7 +40,7 @@ public class OrbsSpawner : MonoBehaviour
             
             leaderboardManager.UpdateLeaderboard(timeManager.time);
             leaderboardManager.lastDeath = timeManager.totalTime;
-            await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(1);
+            UnityEngine.SceneManagement.SceneManager.UnloadScene(1);
             UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
     }
