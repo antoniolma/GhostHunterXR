@@ -15,6 +15,9 @@ public class OrbsSpawner : MonoBehaviour
     public int maxNumberOfTry = 100;
     private int currentNumberOfTry = 0;
 
+    private float timer;
+    public float changeTime = 3.0f;    // Every X seconds, change position
+
     public static OrbsSpawner instance;
 
     private void Awake()
@@ -26,6 +29,19 @@ public class OrbsSpawner : MonoBehaviour
     void Start()
     {
         MRUK.Instance.RegisterSceneLoadedCallback(SpawnOrbs);
+    }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > changeTime)
+        {
+            foreach (GameObject orb in spawnedOrbs)
+            {
+                ChangePosition(orb);
+            }
+            timer -= changeTime;
+        }
     }
 
     public void DestroyOrb(GameObject orb)
@@ -45,6 +61,31 @@ public class OrbsSpawner : MonoBehaviour
         }
     }
 
+    public void ChangePosition(GameObject orb)
+    {
+        Vector3 randomPosition = Vector3.zero;
+
+        MRUKRoom room = MRUK.Instance.GetCurrentRoom();
+
+        currentNumberOfTry = 0;
+        bool hasFound = false;
+        while (currentNumberOfTry < maxNumberOfTry)
+        {
+            hasFound = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.FACING_UP,
+                1, new LabelFilter(MRUKAnchor.SceneLabels.FLOOR), out randomPosition, out Vector3 n);
+
+            if (hasFound)
+                break;
+
+            currentNumberOfTry++;
+        }
+
+        randomPosition.y = height;
+
+        if (hasFound)
+            orb.transform.position = randomPosition;
+    }
+
     public void SpawnOrbs()
     {
         for (int i = 0; i < numberOfOrbsToSpawn; i++)
@@ -53,6 +94,7 @@ public class OrbsSpawner : MonoBehaviour
 
             MRUKRoom room = MRUK.Instance.GetCurrentRoom();
 
+            currentNumberOfTry = 0;
             while (currentNumberOfTry < maxNumberOfTry)
             {
                 bool hasFound = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.FACING_UP,

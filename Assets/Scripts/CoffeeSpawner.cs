@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Meta.XR.MRUtilityKit;
-using UnityEditor.ProjectWindowCallback;
 
 public class CoffeeSpawner : MonoBehaviour
 {
