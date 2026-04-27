@@ -14,6 +14,8 @@ public class RayGun : MonoBehaviour
     public float lineShowTimer = 0.3f;
 
     List<float> rayAngles = new List<float>();
+    List<float> rayAnglesOld = new List<float>();
+
     private float currentSpreadOffset = 0.2f;
 
     public AudioSource audioSource;
@@ -23,6 +25,7 @@ public class RayGun : MonoBehaviour
     void Start()
     {
         rayAngles.Add(0f);
+        rayAnglesOld.Add(0f);
     }
 
     // Update is called once per frame
@@ -36,12 +39,14 @@ public class RayGun : MonoBehaviour
 
     public void ShootSpread()
     {
-        foreach (float offset in rayAngles)
+        foreach (float offset in rayAnglesOld)
         {
             Vector3 angle = new Vector3(offset + shootingPoint.forward.x, shootingPoint.forward.y, shootingPoint.forward.z);
             Shoot(angle);
         }
         audioSource.PlayOneShot(laserSound);
+
+        rayAnglesOld = new List<float>(rayAngles);
     }
 
     public void Shoot(Vector3 angle)
